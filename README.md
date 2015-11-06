@@ -7,6 +7,7 @@
 	使用了以下包中的函数
 	
 ~~~go
+"os"
 "io/ioutil"
 "log"
 "net/http"
