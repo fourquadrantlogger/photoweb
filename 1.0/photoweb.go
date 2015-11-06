@@ -3,7 +3,6 @@ package main
 import (
 	"io"
 	"os"
-	"config"
 )
 
 import(
@@ -13,12 +12,14 @@ import(
 	"html/template"
 )
 
+var	root=""
 const(
-	Upload_dir="./uploads"
-	View_dir="./views"
+
+	Upload_dir="/uploads"
+	View_dir="/views"
 )
 func listHandler(w http.ResponseWriter,r *http.Request){
-	fileInfoArr,err:=ioutil.ReadDir("./uploads")
+	fileInfoArr,err:=ioutil.ReadDir(root+"/"+"/uploads")
 	if err!=nil{
 		http.Error(w,err.Error(),http.StatusInternalServerError)
 		
@@ -33,8 +34,8 @@ func listHandler(w http.ResponseWriter,r *http.Request){
 	}
 
 	locals["images"]=images
-	t:=template.Must(template.ParseFiles(View_dir+"/"+"list.html"))
-	log.Println(View_dir+"/"+"list.html")
+	t:=template.Must(template.ParseFiles(root+View_dir+"/"+"list.html"))
+	log.Println(root+"/"+View_dir+"/"+"list.html")
 	if err!=nil{
 		http.Error(w,err.Error(),http.StatusInternalServerError)
 		
@@ -47,7 +48,7 @@ func listHandler(w http.ResponseWriter,r *http.Request){
 func uploadHandler(w http.ResponseWriter,r *http.Request){
 	switch r.Method{
 		case "GET":
-			bytes,err:=ioutil.ReadFile("./views/upload.html")
+			bytes,err:=ioutil.ReadFile(root+"/views/upload.html")
 			if err!=nil{
 				log.Fatal("ioutil.ReadFile():",err.Error())
 			}else{
@@ -64,7 +65,7 @@ func uploadHandler(w http.ResponseWriter,r *http.Request){
 			filename:=h.Filename
 
 			defer file.Close()
-			t,err:=os.Create(Upload_dir+"/"+filename)
+			t,err:=os.Create(root+"/"+Upload_dir+"/"+filename)
 			log.Println("Create"+Upload_dir+"/"+filename)
 			if err!=nil{
 				http.Error(w,err.Error(),http.StatusInternalServerError)
@@ -81,9 +82,30 @@ func uploadHandler(w http.ResponseWriter,r *http.Request){
 			http.Redirect(w,r,"/views?id="+filename,http.StatusFound)
 	}
 }
+func checkDir(){
+	Uploadinfo, err := os.Stat(root+Upload_dir)
+	if err != nil {
+	    // no such file or dir
+	    return
+	}
+	if Uploadinfo.IsDir() {
+	    // it's a file
+	} else {
+	    os.Mkdir(root+Upload_dir,os.ModePerm)
+	}
 
+	_, err= os.Stat(root+View_dir)
+	if err != nil {
+		log.Fatal("views file not found! require template file")
+	    // no such file or dir
+	    return
+	}
+
+}
 func main(){
-	config.LoadConfig()
+    root,_=os.Getwd()
+	
+	checkDir()
 	http.HandleFunc("/upload",uploadHandler)
 	http.HandleFunc("/views",listHandler)
 	err:=http.ListenAndServe(":8090",nil)
