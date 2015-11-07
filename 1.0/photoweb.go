@@ -3,9 +3,6 @@ package main
 import (
 	"io"
 	"os"
-)
-
-import(
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -19,7 +16,7 @@ const(
 	View_dir="/views"
 )
 func listHandler(w http.ResponseWriter,r *http.Request){
-	fileInfoArr,err:=ioutil.ReadDir(root+"/"+"/uploads")
+	fileInfoArr,err:=ioutil.ReadDir(root+"/"+"uploads")
 	if err!=nil{
 		http.Error(w,err.Error(),http.StatusInternalServerError)
 		
@@ -85,7 +82,8 @@ func uploadHandler(w http.ResponseWriter,r *http.Request){
 func checkDir(){
 	Uploadinfo, err := os.Stat(root+Upload_dir)
 	if err != nil {
-	    // no such file or dir
+	    os.Mkdir(root+Upload_dir,os.ModePerm)
+		log.Println("os.Mkdir("+root+Upload_dir)
 	    return
 	}
 	if Uploadinfo.IsDir() {

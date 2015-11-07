@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head><title>upload</title>
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.4.2/css/amazeui.min.css">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.4.2/css/amazeui.css">
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.4.2/js/amazeui.min.js"></script>
+
+</head>
+<body>
+<header class="am-topbar am-topbar-fixed-top">
+    <h1 class="am-topbar-brand">
+        <a href="#">photoweb</a>
+    </h1>
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+            data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
+            class="am-icon-bars"></span></button>
+
+    <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+        <ul class="am-nav am-nav-pills am-topbar-nav">
+            <li><a href="/list">首页</a></li>
+            <li class="am-active"><a href="/upload">上传</a></li>
+
+        </ul>
+    </div>
+</header>
+<div class="am-g am-padding">
+
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-hd">上传一张照片</div>
+            <div class="am-panel-bd">
+                <form method="POST" action="/upload" enctype="multipart/form-data" class="am-form ">
+                    <p class="am-form-help">选择一张图片上传</p>
+                    <input name="image" type="file"/>
+                    <input type="submit" value="上传" class="am-btn-success">
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
