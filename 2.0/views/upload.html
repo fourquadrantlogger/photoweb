@@ -28,18 +28,35 @@
 </header>
 <div class="am-g am-padding">
 
-        <div class="am-panel am-panel-default">
-            <div class="am-panel-hd">上传一张照片</div>
-            <div class="am-panel-bd">
-                <form method="POST" action="/upload" enctype="multipart/form-data" class="am-form ">
-                    <p class="am-form-help">选择一张图片上传</p>
-                    <input name="image" type="file"/>
-                    <input type="submit" value="上传" class="am-btn-success">
-                </form>
-            </div>
+    <div class="am-panel am-panel-default">
+        <div class="am-panel-hd">上传一张照片</div>
+        <div class="am-panel-bd">
+            <form method="POST" action="/upload" enctype="multipart/form-data" class="am-form ">
+                <p class="am-form-help">选择一张图片上传</p>
+                <input name="image" type="file"/>
+                <input type="submit" value="上传" class="am-btn-success">
+            </form>
         </div>
-
     </div>
 
+</div>
+{{define "footer"}}
+  <footer data-am-widget="footer"
+          class="am-footer am-footer-default"
+           data-am-footer="{  }">
+
+    <div class="am-footer-miscs ">
+
+          <p>由 <a href="/list" title="photoweb"
+                                                target="_blank" class="">photoweb</a>
+            提供技术支持</p>
+        <p>CopyRight©2014  AllMobilize Inc.</p>
+        <p>京ICP备13033158</p>
+    </div>
+  </footer>
+
+
+{{end}}
+{{template "footer"}}
 </body>
 </html>
