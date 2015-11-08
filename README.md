@@ -24,5 +24,6 @@
 ### 增加了前端部分
    使用amazeui，整体界面效果大大提升
    使用了瀑布流效果，用来展示首页照片
+   <img src=https://github.com/timeloveboy/photoweb/blob/master/example/sample.jpg>
 ### 相关新函数用法
 http.ServeFile()方法将该路径下的文件从磁盘中 读取并作为服务端的返回信息输出给客户端
