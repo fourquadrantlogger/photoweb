@@ -29,17 +29,20 @@
 <div class="imgsparent" style="position: relative;margin: 50px;">
         <style>
             .imgdiv{
+                 width: 250px;
                 position: absolute;
                 border: solid 1px #D8D8D8;
                 -webkit-transition: all .7s ease-out .1s;
                 -moz-transition: all .7s ease-out;
                 -o-transition: all .7s ease-out .1s;
-                transition: all .7s ease-out .1s
-
+                transition: all .7s ease-out .1s;
                 float:left;
             }
             .imgdiv img{
-                width: 250px;
+                width:100%;
+            }
+            .imgdiv h3{
+                background:#dddddd;
             }
         </style>
         {{range $.images}}
